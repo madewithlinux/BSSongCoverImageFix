@@ -46,8 +46,6 @@ namespace BSSongCoverImageFix
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-            new GameObject("BSSongCoverImageFixController").AddComponent<BSSongCoverImageFixController>();
-
         }
 
         [OnExit]

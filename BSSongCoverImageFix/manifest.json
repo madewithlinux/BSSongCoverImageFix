@@ -2,10 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
   "id": "BSSongCoverImageFix",
   "name": "BSSongCoverImageFix",
-  "author": "",
-  "version": "0.0.1",
-  "description": "",
-  "gameVersion": "1.18.3",
+  "author": "madewithlinux",
+  "version": "1.0.2",
+  "description": "resizes song cover images to 256x256 and generates mipmaps",
+  "gameVersion": "1.29.1",
   "dependsOn": {
     "BSIPA": "^4.2.0"
   }
