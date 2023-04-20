@@ -1,12 +1,6 @@
-﻿using IPA;
-using IPA.Config;
-using IPA.Config.Stores;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using System.Reflection;
+using HarmonyLib;
+using IPA;
 using IPALogger = IPA.Logging.Logger;
 
 namespace BSSongCoverImageFix
@@ -16,6 +10,7 @@ namespace BSSongCoverImageFix
     {
         internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
+        internal static Harmony harmony { get; private set; }
 
         [Init]
         /// <summary>
@@ -46,13 +41,15 @@ namespace BSSongCoverImageFix
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
+            harmony = new Harmony("BSSongCoverImageFix");
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         [OnExit]
         public void OnApplicationQuit()
         {
             Log.Debug("OnApplicationQuit");
-
+            harmony.UnpatchSelf();
         }
     }
 }
