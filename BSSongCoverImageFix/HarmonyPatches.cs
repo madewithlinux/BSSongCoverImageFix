@@ -33,9 +33,12 @@ namespace BSSongCoverImageFix
             CancellationToken cancellationToken
         )
         {
+            // Plugin.Log.Trace(path);
+            // Plugin.Log.Trace($"is cancellationToken null? {cancellationToken == null}");
             if (!File.Exists(path))
             {
                 // fall back to original method if `path` isn't a local file that exists
+                // Plugin.Log.Trace("falling back to MediaAsyncLoader.LoadSpriteAsync()");
                 var sw = new Stopwatch();
                 sw.Start();
                 var sp = await MediaAsyncLoader.LoadSpriteAsync(path, cancellationToken);
@@ -44,15 +47,17 @@ namespace BSSongCoverImageFix
                 {
                     if (sp != null)
                     {
-                        Plugin.Log.Warn(
-                            $"async sprite took {elapsed} ms to load: {sp.texture.width}x{sp.texture.height} {path}"
-                        );
+                        // Plugin.Log.Warn(
+                        //     // $"async sprite took {elapsed} ms to load: {sp.texture.width}x{sp.texture.height} {path}"
+                        //     $"async sprite took {elapsed} ms to load: {sp.texture.width}x{sp.texture.height}"
+                        // );
                     }
                     else
                     {
-                        Plugin.Log.Warn(
-                            $"async sprite took {elapsed} ms to load, and returned null {path}"
-                        );
+                        // Plugin.Log.Warn(
+                        //     // $"async sprite took {elapsed} ms to load, and returned null {path}"
+                        //     $"async sprite took {elapsed} ms to load, and returned null"
+                        // );
                     }
                 }
                 return sp;
@@ -108,7 +113,8 @@ namespace BSSongCoverImageFix
                 var elapsed1 = sw1.Elapsed.TotalMilliseconds;
                 if (elapsed1 > 50.0)
                 {
-                    Plugin.Log.Info($"read and resize took {elapsed1} ms: {path}");
+                    // Plugin.Log.Info($"read and resize took {elapsed1} ms: {path}");
+                    Plugin.Log.Info($"read and resize took {elapsed1} ms");
                 }
                 return anotherMemoryStreamYippee.ToArray();
             });
@@ -130,7 +136,8 @@ namespace BSSongCoverImageFix
             if (elapsed2 > 8.0 && spriteTexture != null)
             {
                 Plugin.Log.Warn(
-                    $"LoadImage took {elapsed2} ms: {spriteTexture.width}x{spriteTexture.height} {path}"
+                    // $"LoadImage took {elapsed2} ms: {spriteTexture.width}x{spriteTexture.height} {path}"
+                    $"LoadImage took {elapsed2} ms: {spriteTexture.width}x{spriteTexture.height}"
                 );
             }
             return spriteTexture;
